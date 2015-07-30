@@ -1,0 +1,10 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<builtins>
+	<builtin name="myBuiltin" ns="http://www.nebrija.es/~asanchep/owlswrl#" minArity="-1" maxArity="-1"/>
+	<builtin name="myBuiltin2" ns="http://www.nebrija.es/~asanchep/owlswrl#" minArity="1" maxArity="2">
+		<reasonerStrategy class="com.clarkparsia.protege.plugin.pellet.PelletReasonerFactory">
+		 	<param name="className" value="com.nebrija.owlapi.customswrl.pellet.example.SampleFunction"/>
+		   	<param name="builtInType" value="Tester"/>
+		</reasonerStrategy>
+	</builtin>
+</builtins>
