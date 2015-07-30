@@ -1,0 +1,41 @@
+//Modified by ASM 
+// Pellet is an OWL 2 reasoner in Java; open source (AGPL) and commercially licensed, commercial support available.
+// https://github.com/Complexible/pellet
+// http://clarkparsia.com/pellet
+
+package com.clarkparsia.protege.plugin.pellet;
+
+import org.mindswap.pellet.PelletOptions;
+import org.protege.editor.owl.model.inference.AbstractProtegeOWLReasonerInfo;
+import org.semanticweb.owlapi.reasoner.BufferingMode;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+
+import com.nebrija.owlapi.customswrl.CustomSWRLConfigParser;
+import com.nebrija.owlapi.customswrl.SWRLCustomBuiltInsVocabulary;
+import com.nebrija.owlapi.customswrl.pellet.PelletCustomBuiltinRegistrator;
+
+public class PelletReasonerFactory extends AbstractProtegeOWLReasonerInfo
+{
+
+    public PelletReasonerFactory()
+    {
+    	CustomSWRLConfigParser parser = new CustomSWRLConfigParser();
+       	new PelletCustomBuiltinRegistrator().register(parser.parseRegistration(SWRLCustomBuiltInsVocabulary.CONFIG_FILE, this.getClass().getName()));
+    }
+
+    public OWLReasonerFactory getReasonerFactory()
+    {
+        return com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory.getInstance();
+    }
+
+    public BufferingMode getRecommendedBuffering()
+    {
+        return BufferingMode.BUFFERING;
+    }
+
+    static 
+    {
+        PelletOptions.IGNORE_UNSUPPORTED_AXIOMS = false;
+        PelletOptions.SILENT_UNDEFINED_ENTITY_HANDLING = true;
+    }
+}
